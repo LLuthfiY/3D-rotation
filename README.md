@@ -204,7 +204,7 @@ def getMatrix(angle):
 ```
 ## interesting things
 ![ori](https://github.com/LLuthfiY/3D-rotation/blob/master/img/Untitled2.jpg)
-
+#### warna biru karena saya meng import gambar dengan open cv
 terdapat sedikit miss calculation untuk x90, z90, y90
 
 jadi hasil dari programnya harus diround terlebih dahulu
