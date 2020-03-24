@@ -6,16 +6,16 @@ Muhammad Luthfi A
 euler rotation 
 
 ![ori](https://github.com/LLuthfiY/3D-rotation/blob/master/img/ori.jpg)
-ori
+### ori
 
 ![x90](https://github.com/LLuthfiY/3D-rotation/blob/master/img/x90.jpg)
-x90
+### x90
 
 ![y90](https://github.com/LLuthfiY/3D-rotation/blob/master/img/y90.jpg)
-y90
+### y90
 
 ![z90](https://github.com/LLuthfiY/3D-rotation/blob/master/img/z90.jpg)
-z90
+### z90
 
 ## euler
 
@@ -198,7 +198,9 @@ def getMatrix(angle):
 ```
 ## interesting things
 ![ori](https://github.com/LLuthfiY/3D-rotation/blob/master/img/Untitled2.jpg)
+
 terdapat sedikit miss calculation
 
 jadi hasil dari programnya harus diround terlebih dahulu
+![ori](https://github.com/LLuthfiY/3D-rotation/blob/master/img/all90.jpg)
 
