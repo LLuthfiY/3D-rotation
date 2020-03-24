@@ -197,7 +197,7 @@ def getMatrix(angle):
                      [0, 0, 1]])
 ```
 ## interesting things
-![ori](https://github.com/LLuthfiY/3D-rotation/blob/master/img/untitled2.jpg)
+![ori](https://github.com/LLuthfiY/3D-rotation/blob/master/img/Untitled2.jpg)
 terdapat sedikit miss calculation
 
 jadi hasil dari programnya harus diround terlebih dahulu
