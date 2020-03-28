@@ -11,13 +11,13 @@ print(img.shape)
 img = img / img.max()
 img = np.dstack((img, np.ones(img.shape[:2])))
 
-X, Y = np.mgrid[0:img.shape[0], 0:img.shape[1]]
+x, y = np.mgrid[0:img.shape[0], 0:img.shape[1]]
 print (X.shape)
 
 # A blank, straight 0 Z coordinate
-Z = np.zeros(X.shape)
+z = np.zeros(X.shape)
 
-x, y, z= zip([0,0,0],[0,4,0])
+
 
 def rotate3D(x, y, z, alpha, beta, gamma, order = ['x','y','z']):
     
@@ -87,7 +87,7 @@ def rotate3D(x, y, z, alpha, beta, gamma, order = ['x','y','z']):
     
 
 #newx, newy, newz, newx2, newy2, newz2 = rotate3D(X, Y, Z, 0, 0, 90, ('x','y','z'))
-newx, newy, newz = rotate3D(X, Y, Z, 90, 90, 90, ('x','y','z'))
+newx, newy, newz = rotate3D(x, y, z, 90, 90, 90, ('x','y','z'))
 
 
 newx = np.round(newx.reshape(img.shape[0],img.shape[1]), decimals=10)
