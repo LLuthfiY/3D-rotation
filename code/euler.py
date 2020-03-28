@@ -12,10 +12,10 @@ img = img / img.max()
 img = np.dstack((img, np.ones(img.shape[:2])))
 
 x, y = np.mgrid[0:img.shape[0], 0:img.shape[1]]
-print (X.shape)
+print (x.shape)
 
 # A blank, straight 0 Z coordinate
-z = np.zeros(X.shape)
+z = np.zeros(x.shape)
 
 
 
