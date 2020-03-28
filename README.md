@@ -71,7 +71,41 @@ yang dikalikan dot product dengan koordinat yang sesuai terhadap rotasinya
 ```
 akan menghasilkan sebuah koordinat baru hasil dari rotasi 
 
-## convert to code
+## Quaternion
+anggap saja kita memiliki fungsi quaternion2D yang gambarnya seperti berikut
+![quaternion2D](https://github.com/LLuthfiY/3D-rotation/blob/master/img/quaternionExplain/quater2D.jpg)
+##### x = cos(theta), y = sin(theta)
+
+
+look familiar? NO? how about This?
+![quaternion2Dimaginer](https://github.com/LLuthfiY/3D-rotation/blob/master/img/quaternionExplain/quater2DImaginer.jpg)
+##### real = cos(theta), i = sin(theta)
+
+
+dengan gambar diatas kita bisa menebak bentuk dari quaternion
+![quaternion4D](https://github.com/LLuthfiY/3D-rotation/blob/master/img/quaternionExplain/4D.jpg)
+##### real = cos(theta), i = sin(theta), j = sin(theta), k = sin(theta)
+
+
+sehingga didapatkan rumus 
+> quaternion = (cos(theta), sin(theta), sin(theta), sin(theta))
+dan 
+> p' = q * p
+##### tapi
+jika dilakukan hal seperti itu, rotasi nya akan menjadi rotasi 4D
+
+maka dari itu, muncullah IDE utama dari quaternion rotation, yaitu membagi rotasinya menjadi 2 tahap:
+- tahap pertama menjalankan rotasi hingga setengah bagian
+- tahap kedua melanjutkan rotasi sambil menghilangkan rotasi dimensi ke 4
+
+![rotasi4Dgraph](https://github.com/LLuthfiY/3D-rotation/blob/master/img/quaternionExplain/4Dgraph2.jpg)
+##### 
+sehingga diperoleh rumus 
+> quaternion = (cos(theta/2), sin(theta/2), sin(theta/2), sin(theta/2))
+dan 
+> p' = q * p * q^-1
+
+# convert to code
 
 ## euler
 ```
@@ -201,6 +235,81 @@ def getMatrix(angle):
     return np.array([[np.cos(angle), -np.sin(angle), 0],
                      [np.sin(angle), np.cos(angle), 0],
                      [0, 0, 1]])
+```
+
+## Quaternion
+main code
+```
+def transform(x, y, z, axisRotation, angle):
+    angle = np.deg2rad(angle) #quaternion akan membagi angle dengan 2
+    
+    axis = [[axisRotation[0], 0, 0],
+            [0, axisRotation[1], 0],
+            [0, 0, axisRotation[2]]]
+    axis.reverse()
+    
+    print (axis)
+    row, col = x.shape
+    
+    
+    newX, newY, newZ = [],[],[]
+    for r in range(row):
+        for c in range(col):
+            
+            for xx in range(3):
+                if xx == 0:
+                    qua = getQuaternion(axis[xx], angle)
+                else:
+                    qua = quaMultiQua(qua, getQuaternion(axis[xx], angle))
+            
+                    
+            tempx, tempy, tempz = quaMultiVec(qua, [0, r, c, z[r,c]]) 
+            
+           
+            newX.append(tempx)
+            newY.append(tempy)
+            newZ.append(tempz)
+            
+    return np.array(newX), np.array(newY), np.array(newZ)
+```
+quaternion ke xx dikali dengan quaternion dikali dengan quaternion selanjutnya agar dapat melakukan rotasi 2 axis / lebih
+
+get Quaternion
+```
+def getQuaternion(vector, angle = 0):
+    
+    w = np.cos(angle/2)
+    x = vector[0]*np.sin(angle/2)
+    y = vector[1]*np.sin(angle/2)
+    z = vector[2]*np.sin(angle/2)
+    
+    return np.array([w, x, y, z])
+```
+-----------------------------------------------------------------------------------------
+inverse Quaternion
+```
+def quaInverse(vector):
+    return np.array([vector[0], -vector[1], -vector[2], -vector[3]])
+```
+-----------------------------------------------------------------------------------------
+Quaternion * Quaternion
+```
+def quaMultiQua(q1, q2):
+    w1, x1, y1, z1 = q1
+    w2, x2, y2, z2 = q2
+    w = w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2
+    x = w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2
+    y = w1 * y2 + y1 * w2 + z1 * x2 - x1 * z2
+    z = w1 * z2 + z1 * w2 + x1 * y2 - y1 * x2
+
+    return np.array([w,x,y,z])
+```
+------------------------------------------------------------------------------------------
+p' = q * p * q^-1
+```
+def quaMultiVec(q1, v):
+    quaInv = quaInverse(q1)
+    return quaMultiQua(quaMultiQua(q1, v), quaInv)[1:]
 ```
 ## interesting things
 ![ori](https://github.com/LLuthfiY/3D-rotation/blob/master/img/Untitled2.jpg)
