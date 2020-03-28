@@ -61,7 +61,7 @@ dengan menggunakan matrix rotasi 2D
 ```
 [[np.cos(angle), -np.sin(angle), 0],
  [np.sin(angle),  np.cos(angle), 0],
- [            0,          0,     1]]
+ [            0,              0, 1]]
 ```
 yang dikalikan dot product dengan koordinat yang sesuai terhadap rotasinya
 ```
