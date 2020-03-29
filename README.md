@@ -272,7 +272,7 @@ def transform(x, y, z, axisRotation, angle):
             
     return np.array(newX), np.array(newY), np.array(newZ)
 ```
-quaternion ke xx dikali dengan quaternion dikali dengan quaternion selanjutnya agar dapat melakukan rotasi 2 axis / lebih
+quaternion ke xx dikali dengan quaternion selanjutnya agar dapat melakukan rotasi 2 axis / lebih
 
 get Quaternion
 ```
