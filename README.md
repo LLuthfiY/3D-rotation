@@ -320,5 +320,3 @@ jadi hasil dari programnya harus diround terlebih dahulu
 ![ori](https://github.com/LLuthfiY/3D-rotation/blob/master/img/all90.jpg)
 
 
-# BONUS
-![BONUS](https://github.com/LLuthfiY/3D-rotation/blob/master/img/unnecessary/meme.jpg)
